@@ -1,0 +1,1 @@
+openssl x509 -req -in $1.csr -CA $2.cer -CAkey $2.key -days $3 -out $1.cer -set_serial 01 -extfile openssl.cnf -extensions client
