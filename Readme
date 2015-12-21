@@ -1,1 +1,44 @@
 Simple OpenSSL bash scripts to make generating self signed SSL certificates easy
+
+setconfig
+                       - Sets OPENSSL_CONF to openssl.cnf in this folder (should always be first called script)
+
+
+genkey name
+                       - Generates a new key-pair and stores it as "name" with suffix .key
+
+genreq name
+                       - Creates a new certificate signing request (based on key-pair "name") and stores it as "name" with suffix .CSR
+
+genrootcert name numofdays
+                       - Generates a new root certificate based on request "name" and key "name" - valid for "numofdays" days
+
+genimcert name caname numofdays 
+                       - Generates a new intermediate certificate based on request "name" and ca certificate "caname" - valid for "numofdays" days
+
+genservercert name caname numofdays
+                       - Generates a new server (HTTPS) certificate based on request "name" and ca certificate "caname" - valid for "numofdays" days
+
+genclientcert name caname numofdays
+                       - Generates a new client authentication certificate based on request "name" and ca certificate "caname" - valid for "numofdays" days
+
+
+openssl.cnf
+                       - default openssl configuration file
+openssl.ext
+                       - openssl extension for server and client authentication certificates
+Readme
+                       - This file
+
+Examples:
+---------
+
+- Generating a new root certificate:
+genkey MyRoot
+genreq MyRoot
+genrootcert MyRoot 365
+
+- Generating a server (HTTPS) certificate (with MyRoot as CA):
+genkey MyServer
+genreq MyServer
+genservercert MyServer MyRoot 365

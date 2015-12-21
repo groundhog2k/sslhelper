@@ -1,1 +1,1 @@
-openssl x509 -req -in $1.csr -signkey $1.key -days $2 -out $1.cer -extfile openssl.cnf
+openssl x509 -req -in $1.csr -signkey $1.key -days $2 -out $1.cer
